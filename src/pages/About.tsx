@@ -2,72 +2,70 @@ import { FaUsers, FaTrophy, FaHandshake } from 'react-icons/fa';
 
 const About = () => {
     return (
-        <div>
+        <div className="bg-slate-50 min-h-screen">
             {/* Header */}
-            <div style={{ background: 'var(--secondary)', padding: '6rem 0', color: 'white', textAlign: 'center' }}>
-                <h1 className="hero-title" style={{ fontSize: 'clamp(3rem, 5vw, 4rem)', marginBottom: '1rem' }}>Our Story</h1>
-                <p style={{ color: '#94A3B8', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto', padding: '0 1rem' }}>
+            <div className="bg-secondary py-24 text-center text-white">
+                <h1 className="hero-title text-4xl md:text-6xl mb-6">Our Story</h1>
+                <p className="text-slate-400 text-xl max-w-2xl mx-auto px-4">
                     Redefining luxury car rentals with a commitment to excellence and customer satisfaction.
                 </p>
             </div>
 
-            <div className="container section-padding">
-                <div className="grid-2-cols">
+            <div className="container py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <span style={{ color: 'var(--primary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>Who We Are</span>
-                        <h2 className="section-title" style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>Driven by Passion, <br /> Defined by Quality.</h2>
-                        <p style={{ color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+                        <span className="text-primary font-semibold uppercase tracking-widest text-sm">Who We Are</span>
+                        <h2 className="section-title mt-2 mb-6">Driven by Passion, <br /> Defined by Quality.</h2>
+                        <p className="text-slate-600 leading-relaxed mb-6 font-medium">
                             Founded in 2024, NOVA Rental was born from a simple idea: that renting a car should be as enjoyable as driving one.
                             We realized that the traditional rental market lacked the personal touch and premium quality that discerning drivers deserve.
                         </p>
-                        <p style={{ color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '2rem' }}>
+                        <p className="text-slate-600 leading-relaxed mb-8">
                             Today, we are proud to offer a curated fleet of the world's finest vehicles, backed by a team that is dedicated to ensuring
                             your journey is seamless from start to finish.
                         </p>
-                        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+                        <div className="flex flex-wrap gap-12">
                             <div>
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--primary)' }}>50+</h3>
-                                <p style={{ color: 'var(--text-muted)' }}>Premium Cars</p>
+                                <h3 className="text-4xl font-bold text-primary mb-1">50+</h3>
+                                <p className="text-slate-500 font-medium">Premium Cars</p>
                             </div>
                             <div>
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--primary)' }}>24/7</h3>
-                                <p style={{ color: 'var(--text-muted)' }}>Support</p>
+                                <h3 className="text-4xl font-bold text-primary mb-1">24/7</h3>
+                                <p className="text-slate-500 font-medium">Support</p>
                             </div>
                             <div>
-                                <h3 style={{ fontSize: '2.5rem', color: 'var(--primary)' }}>100%</h3>
-                                <p style={{ color: 'var(--text-muted)' }}>Satisfaction</p>
+                                <h3 className="text-4xl font-bold text-primary mb-1">100%</h3>
+                                <p className="text-slate-500 font-medium">Satisfaction</p>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div style={{ position: 'relative' }}>
-                            <div style={{ position: 'absolute', top: '-20px', left: '-20px', width: '100%', height: '100%', border: '2px solid var(--primary)', borderRadius: 'var(--radius-lg)', zIndex: 0 }}></div>
-                            <img
-                                src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                                alt="Office Team"
-                                style={{ width: '100%', borderRadius: 'var(--radius-lg)', position: 'relative', zIndex: 1, boxShadow: 'var(--shadow-xl)' }}
-                            />
-                        </div>
+                    <div className="relative">
+                        <div className="absolute -top-6 -left-6 w-full h-full border-2 border-primary rounded-3xl z-0 hidden md:block"></div>
+                        <img
+                            src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                            alt="Office Team"
+                            className="w-full rounded-3xl relative z-10 shadow-2xl"
+                        />
                     </div>
                 </div>
 
-                <div style={{ marginTop: '8rem' }}>
-                    <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '4rem' }}>Why Choose NOVA?</h2>
-                    <div className="grid-3-cols">
-                        <div className="card" style={{ padding: '2.5rem', textAlign: 'center', border: 'none', background: '#F8FAFC' }}>
-                            <FaTrophy size={40} style={{ color: 'var(--accent)', marginBottom: '1.5rem' }} />
-                            <h3>Unmatched Quality</h3>
-                            <p style={{ color: 'var(--text-muted)', marginTop: '1rem' }}>Every vehicle in our fleet is meticulously maintained and inspected to ensure optimal performance and safety.</p>
+                <div className="mt-32">
+                    <h2 className="section-title text-center mb-16">Why Choose NOVA?</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="card p-10 text-center bg-white border border-slate-100 hover:border-primary/20">
+                            <FaTrophy size={40} className="text-amber-500 mx-auto mb-6" />
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">Unmatched Quality</h3>
+                            <p className="text-slate-500 leading-relaxed">Every vehicle in our fleet is meticulously maintained and inspected to ensure optimal performance and safety.</p>
                         </div>
-                        <div className="card" style={{ padding: '2.5rem', textAlign: 'center', border: 'none', background: '#F8FAFC' }}>
-                            <FaUsers size={40} style={{ color: 'var(--primary)', marginBottom: '1.5rem' }} />
-                            <h3>Customer First</h3>
-                            <p style={{ color: 'var(--text-muted)', marginTop: '1rem' }}>We build relationships, not just bookings. Our team goes above and beyond to meet your specific needs.</p>
+                        <div className="card p-10 text-center bg-white border border-slate-100 hover:border-primary/20">
+                            <FaUsers size={40} className="text-primary mx-auto mb-6" />
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">Customer First</h3>
+                            <p className="text-slate-500 leading-relaxed">We build relationships, not just bookings. Our team goes above and beyond to meet your specific needs.</p>
                         </div>
-                        <div className="card" style={{ padding: '2.5rem', textAlign: 'center', border: 'none', background: '#F8FAFC' }}>
-                            <FaHandshake size={40} style={{ color: 'var(--success)', marginBottom: '1.5rem' }} />
-                            <h3>Transparent Pricing</h3>
-                            <p style={{ color: 'var(--text-muted)', marginTop: '1rem' }}>No hidden fees or surprises. What you see is what you pay, with flexible terms to suit your schedule.</p>
+                        <div className="card p-10 text-center bg-white border border-slate-100 hover:border-primary/20">
+                            <FaHandshake size={40} className="text-green-500 mx-auto mb-6" />
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">Transparent Pricing</h3>
+                            <p className="text-slate-500 leading-relaxed">No hidden fees or surprises. What you see is what you pay, with flexible terms to suit your schedule.</p>
                         </div>
                     </div>
                 </div>

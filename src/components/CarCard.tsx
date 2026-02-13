@@ -14,57 +14,50 @@ interface CarCardProps {
 
 const CarCard = ({ id, make, model, year, price, image, available, specs }: CarCardProps) => {
     return (
-        <div className="card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <div style={{ position: 'relative', height: '240px', overflow: 'hidden' }}>
+        <div className="card group flex flex-col h-full overflow-hidden border border-slate-200 bg-white hover:shadow-xl transition-all duration-300">
+            <div className="relative h-60 overflow-hidden">
                 {image ? (
                     <img
                         src={image}
                         alt={`${make} ${model}`}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            transition: 'transform 0.5s ease'
-                        }}
-                        onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                        onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                 ) : (
-                    <div style={{ width: '100%', height: '100%', background: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#CBD5E1' }}>No Image</div>
+                    <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">No Image</div>
                 )}
-                <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+                <div className="absolute top-4 right-4">
                     {available ? (
-                        <span style={{ background: 'rgba(16, 185, 129, 0.9)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 600, backdropFilter: 'blur(4px)' }}>
+                        <span className="bg-emerald-500/90 text-white px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm shadow-sm">
                             Available
                         </span>
                     ) : (
-                        <span style={{ background: 'rgba(239, 68, 68, 0.9)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 600, backdropFilter: 'blur(4px)' }}>
+                        <span className="bg-rose-500/90 text-white px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm shadow-sm">
                             Booked
                         </span>
                     )}
                 </div>
             </div>
 
-            <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ marginBottom: '1rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
-                        <h3 style={{ fontSize: '1.25rem' }}>{make} {model}</h3>
-                        <span style={{ color: 'var(--text-light)', fontSize: '0.9rem', fontWeight: 500 }}>{year}</span>
+            <div className="p-6 flex flex-col flex-1">
+                <div className="mb-4">
+                    <div className="flex justify-between items-baseline mb-2">
+                        <h3 className="text-xl font-bold text-slate-900">{make} {model}</h3>
+                        <span className="text-slate-500 text-sm font-medium border border-slate-200 px-2 py-0.5 rounded">{year}</span>
                     </div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--primary)' }}>
-                        Ksh {price.toLocaleString()} <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 400 }}>/ day</span>
+                    <div className="text-2xl font-bold text-primary">
+                        Ksh {price.toLocaleString()} <span className="text-sm text-slate-400 font-normal">/ day</span>
                     </div>
                 </div>
 
                 {/* Mini Specs */}
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><FaGasPump /> {specs?.Fuel || 'Petrol'}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><FaCogs /> {specs?.Transmission || 'Auto'}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><FaChair /> {specs?.Seating || 4} Seats</div>
+                <div className="flex gap-4 mb-6 text-slate-500 text-sm">
+                    <div className="flex items-center gap-1.5"><FaGasPump className="text-primary/70" /> {specs?.Fuel || 'Petrol'}</div>
+                    <div className="flex items-center gap-1.5"><FaCogs className="text-primary/70" /> {specs?.Transmission || 'Auto'}</div>
+                    <div className="flex items-center gap-1.5"><FaChair className="text-primary/70" /> {specs?.Seating || 4} Seats</div>
                 </div>
 
-                <div style={{ marginTop: 'auto' }}>
-                    <Link to={`/cars/${id}`} className="btn btn-primary" style={{ width: '100%' }}>
+                <div className="mt-auto">
+                    <Link to={`/cars/${id}`} className="btn btn-outline w-full justify-center hover:bg-primary hover:border-primary hover:text-white transition-colors">
                         View Details
                     </Link>
                 </div>
