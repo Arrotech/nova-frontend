@@ -19,17 +19,17 @@ const Catalog = () => {
     }, []);
 
     return (
-        <div style={{ background: 'var(--bg-body)', paddingBottom: '4rem' }}>
-            <div style={{ background: 'var(--secondary)', padding: '5rem 0', color: 'white', textAlign: 'center', marginBottom: '3rem' }}>
-                <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Our Elite Fleet</h1>
-                <p style={{ color: '#94A3B8', fontSize: '1.2rem' }}>Choose from our wide selection of premium vehicles.</p>
+        <div className="bg-slate-50 min-h-screen pb-16">
+            <div className="bg-secondary py-20 text-center text-white mb-12">
+                <h1 className="hero-title text-5xl mb-4">Our Elite Fleet</h1>
+                <p className="text-slate-400 text-lg">Choose from our wide selection of premium vehicles.</p>
             </div>
 
             <div className="container">
                 {loading ? (
-                    <div style={{ textAlign: 'center', padding: '4rem' }}>Loading cars...</div>
+                    <div className="text-center py-16 text-slate-500">Loading cars...</div>
                 ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2.5rem' }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         {cars.map((car: any) => (
                             <CarCard
                                 key={car.id}
@@ -43,7 +43,7 @@ const Catalog = () => {
                                 specs={car.specs}
                             />
                         ))}
-                        {cars.length === 0 && <p style={{ gridColumn: '1 / -1', textAlign: 'center' }}>No cars available at the moment.</p>}
+                        {cars.length === 0 && <p className="col-span-full text-center text-slate-500 text-lg">No cars available at the moment.</p>}
                     </div>
                 )}
             </div>

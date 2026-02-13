@@ -8,7 +8,7 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const isHome = location.pathname === '/';
-    const { user, isAuthenticated, logout } = useAuth();
+    const { user, isAuthenticated } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -18,61 +18,43 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Determine navbar background style
-    const navbarStyle = {
-        position: 'fixed' as const,
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        padding: scrolled ? '1rem 0' : '1.5rem 0',
-        transition: 'all 0.3s ease',
-        background: scrolled || !isHome ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-        backdropFilter: scrolled || !isHome ? 'blur(10px)' : 'none',
-        boxShadow: scrolled || !isHome ? 'var(--shadow-sm)' : 'none',
-        color: scrolled || !isHome ? 'var(--text-main)' : 'white',
+    const navClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || !isHome
+            ? 'bg-white/95 backdrop-blur-md shadow-sm py-4 text-text-main'
+            : 'bg-transparent py-6 text-white'
+        }`;
+
+    const logoColor = scrolled || !isHome ? 'text-secondary' : 'text-white';
+
+    const getLinkClass = (path: string) => {
+        const isActive = location.pathname === path;
+        return `font-medium hover:opacity-100 transition-opacity relative ${isActive ? 'opacity-100 font-bold' : 'opacity-80'
+            }`;
     };
 
-    const linkStyle = (path: string) => ({
-        color: 'inherit',
-        fontWeight: location.pathname === path ? 700 : 500,
-        position: 'relative' as const,
-        opacity: location.pathname === path ? 1 : 0.8,
-    });
-
     return (
-        <nav style={navbarStyle}>
-            <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Link to="/" style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.75rem',
-                    fontWeight: 800,
-                    letterSpacing: '-0.02em',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                }}>
-                    <span style={{ color: scrolled || !isHome ? 'var(--primary)' : 'white' }}>NOVA</span>
-                    <span style={{ fontWeight: 400 }}>Rental</span>
+        <nav className={navClasses}>
+            <div className="container flex justify-between items-center">
+                <Link to="/" className={`font-heading text-2xl font-extrabold tracking-tighter flex items-center gap-1 ${logoColor}`}>
+                    NOVA<span className="font-normal text-primary">Rental</span>
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className="desktop-menu" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-                    <Link to="/" style={linkStyle('/')}>Home</Link>
-                    <Link to="/cars" style={linkStyle('/cars')}>Fleet</Link>
-                    <Link to="/about" style={linkStyle('/about')}>About</Link>
-                    <Link to="/contact" style={linkStyle('/contact')}>Contact</Link>
+                <div className="hidden md:flex items-center gap-10">
+                    <Link to="/" className={getLinkClass('/')}>Home</Link>
+                    <Link to="/cars" className={getLinkClass('/cars')}>Fleet</Link>
+                    <Link to="/about" className={getLinkClass('/about')}>About</Link>
+                    <Link to="/contact" className={getLinkClass('/contact')}>Contact</Link>
 
                     {isAuthenticated ? (
-                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                            <Link to={user?.is_superuser ? '/admin/dashboard' : '/dashboard'} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
+                        <div className="flex items-center gap-4">
+                            <Link to={user?.is_superuser ? '/admin/dashboard' : '/dashboard'} className="flex items-center gap-2 font-semibold hover:text-primary transition-colors">
                                 <FaUserCircle size={20} /> My Dashboard
                             </Link>
                         </div>
                     ) : (
-                        <div style={{ display: 'flex', gap: '1rem' }}>
-                            <Link to="/login" style={{ fontWeight: 600 }}>Log In</Link>
-                            <Link to="/register" className={`btn ${scrolled || !isHome ? 'btn-primary' : 'btn-outline'}`} style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem' }}>
+                        <div className="flex items-center gap-4">
+                            <Link to="/login" className="font-semibold hover:text-primary">Log In</Link>
+                            <Link to="/register" className={`btn px-5 py-2 text-sm ${scrolled || !isHome ? 'btn-primary' : 'btn-outline border-white text-white hover:bg-white/10'}`}>
                                 Sign Up
                             </Link>
                         </div>
@@ -80,53 +62,40 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Toggle */}
-                <div className="mobile-toggle" style={{ display: 'none', fontSize: '1.5rem', cursor: 'pointer' }} onClick={() => setIsOpen(!isOpen)}>
+                <div className="md:hidden text-2xl cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <FaTimes /> : <FaBars />}
                 </div>
             </div>
 
             {/* Mobile Menu (Overlay) */}
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                right: 0,
-                height: '100vh',
-                width: '70%',
-                background: 'white',
-                boxShadow: '-5px 0 15px rgba(0,0,0,0.1)',
-                transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
-                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                padding: '2rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '2rem',
-                zIndex: 1001,
-                color: 'var(--text-main)'
-            }}>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
-                    <FaTimes size={24} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
+            <div className={`fixed inset-y-0 right-0 w-[70%] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 p-8 flex flex-col gap-8 text-text-main ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className="flex justify-end">
+                    <FaTimes size={24} onClick={() => setIsOpen(false)} className="cursor-pointer text-slate-400 hover:text-slate-600" />
                 </div>
-                <Link to="/" onClick={() => setIsOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 600 }}>Home</Link>
-                <Link to="/cars" onClick={() => setIsOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 600 }}>Fleet</Link>
-                <Link to="/about" onClick={() => setIsOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 600 }}>About</Link>
-                <Link to="/contact" onClick={() => setIsOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 600 }}>Contact</Link>
 
-                {isAuthenticated ? (
-                    <Link to={user?.is_superuser ? '/admin/dashboard' : '/dashboard'} onClick={() => setIsOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--primary)' }}>My Dashboard</Link>
-                ) : (
-                    <>
-                        <Link to="/login" onClick={() => setIsOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 600 }}>Log In</Link>
-                        <Link to="/register" onClick={() => setIsOpen(false)} className="btn btn-primary">Sign Up</Link>
-                    </>
-                )}
+                <div className="flex flex-col gap-6 text-xl font-semibold">
+                    <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-primary">Home</Link>
+                    <Link to="/cars" onClick={() => setIsOpen(false)} className="hover:text-primary">Fleet</Link>
+                    <Link to="/about" onClick={() => setIsOpen(false)} className="hover:text-primary">About</Link>
+                    <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:text-primary">Contact</Link>
+                </div>
+
+                <div className="mt-auto pt-8 border-t border-slate-100 flex flex-col gap-4">
+                    {isAuthenticated ? (
+                        <Link to={user?.is_superuser ? '/admin/dashboard' : '/dashboard'} onClick={() => setIsOpen(false)} className="text-primary font-bold text-lg">My Dashboard</Link>
+                    ) : (
+                        <>
+                            <Link to="/login" onClick={() => setIsOpen(false)} className="btn btn-outline text-center justify-center border-slate-200 text-slate-700">Log In</Link>
+                            <Link to="/register" onClick={() => setIsOpen(false)} className="btn btn-primary text-center justify-center">Sign Up</Link>
+                        </>
+                    )}
+                </div>
             </div>
 
-            <style>{`
-        @media (max-width: 768px) {
-          .desktop-menu { display: none !important; }
-          .mobile-toggle { display: block !important; }
-        }
-      `}</style>
+            {/* Backdrop */}
+            {isOpen && (
+                <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setIsOpen(false)}></div>
+            )}
         </nav>
     );
 };
