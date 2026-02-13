@@ -41,11 +41,11 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#020617] py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
             {/* Background Effects */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[100px] animate-pulse-slow"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[100px] animate-pulse-slow delay-1000"></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px] animate-pulse-slow delay-1000"></div>
             </div>
 
             <div className="max-w-md w-full space-y-8 relative z-10">
@@ -58,7 +58,7 @@ const Register = () => {
                     </p>
                 </div>
 
-                <div className="glass-panel p-8 rounded-2xl shadow-2xl border border-white/5 backdrop-blur-xl bg-black/40">
+                <div className="p-8 rounded-2xl shadow-2xl border border-white/5 bg-surface-card">
                     {error && (
                         <div className="mb-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 text-sm text-center">
                             {error}

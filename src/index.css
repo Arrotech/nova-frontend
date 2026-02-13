@@ -7,10 +7,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply font-body bg-slate-50 text-slate-900;
+    @apply font-body bg-dark text-slate-200;
+  }
+
+  body.nav-open {
+    overflow: hidden;
   }
 
   h1,
@@ -19,7 +24,7 @@
   h4,
   h5,
   h6 {
-    @apply font-heading;
+    @apply font-heading text-white;
   }
 }
 
@@ -33,19 +38,19 @@
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white shadow-lg hover:-translate-y-0.5 hover:shadow-xl hover:opacity-90;
+    @apply bg-surface-card text-white shadow-lg hover:-translate-y-0.5 hover:shadow-xl hover:bg-surface-light;
   }
 
   .btn-outline {
-    @apply border-2 border-current bg-transparent hover:bg-white/10;
+    @apply border-2 border-white/15 bg-transparent text-white hover:bg-white/5;
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-slate-100;
+    @apply bg-surface-card rounded-2xl shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-white/5;
   }
 
   .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/30;
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
   }
 
   .glass-dark {
@@ -53,19 +58,19 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all;
+    @apply w-full px-4 py-3 rounded-xl border border-white/10 bg-surface-light text-white placeholder-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all;
   }
 
   .hero-title {
-    @apply text-4xl md:text-6xl font-extrabold mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-slate-500;
+    @apply text-3xl sm:text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-white;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-4 text-slate-900;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white;
   }
 }
 
-/* Animations using standard CSS as Tailwind arbitrary values can be verbose for keyframes */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
